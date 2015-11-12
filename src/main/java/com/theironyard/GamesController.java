@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sun.security.util.Password;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,14 @@ public class GamesController {
     public String home(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        String name = (String) session.getAttribute("name");
 
+        if (username == null){
+            return"login";
+        }
+        else {
+            model.addAttribute("games", games.findAll());
+            model.addAttribute("users", users.findAll());
+        }
         return "home";
     }
 
@@ -41,20 +48,27 @@ public class GamesController {
             user = new User();
             user.name = name;
             user.username = username;
-            // ADD PASSWORD HASHING HERE;
         }
 
         return "redirect:/";
+        // this isn't complete. You should make a thing for passwords.
     }
 
     @RequestMapping("/add-game")
-    public String addGame(String title, String system, HttpSession session) throws Exception {
+    public String addGame (String title, String genre,String system, HttpSession session) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not Logged in");
-
-
         }
+
+        User user = users.findOneByName(username);
+        Game game = new Game();
+        game.system = system;
+        game.title = title;
+        game.genre = genre;
+        game.user = user;
+        games.save(game);
+
         return "redirect:/";
     }
     @RequestMapping ("logout")

@@ -5,6 +5,7 @@ import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by macbookair on 11/12/15.
@@ -18,4 +19,7 @@ public class Game {
     String system;
     String title;
     String genre;
+
+    @ManyToOne
+    User user;
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+Feel Free to edit your game {{#user}} {{gamerTag}} {{/user}}
+<form action="editGame" method="post">
+    <input type="hidden" name = "id" value="{{id}}"/>
+    <input type="test" placeholder="Enter your new game" name = text/>
+    <button type="post">Submit</button>
+</form>
+</body>
+</html>

@@ -18,7 +18,17 @@ public class Game {
 
     String system;
     String title;
-    String genre;
+
+  public Game(){
+
+  }
+
+
+    public Game(Integer id, String system, String title) {
+        this.id = id;
+        this.system = system;
+        this.title = title;
+    }
 
     @ManyToOne
     User user;

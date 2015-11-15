@@ -1,9 +1,7 @@
 package com.theironyard;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by macbookair on 11/12/15.
@@ -13,9 +11,12 @@ import javax.persistence.Table;
 public class User {
     @Id
     @GeneratedValue
-
     Integer id;
+
     String name;
-    String username;
+    String gamerTag;
     String password;
+
+    @OneToMany (mappedBy = "user")
+    List<Game> games;
 }

@@ -5,6 +5,26 @@
     <title>Games</title>
 </head>
 <body>
-<button type="submit">Logout</button>
+Welcome {{#user}}{{name}}! You are now logged in as {{gamerTag}}{{/user}}
+<br><br>
+<form action = "add-game" method = "post">
+    <input type = "text" placeholder="Enter a game" name = "title"/>
+    <select name = "system"/>
+    <option value = "Choose a system next time :(">-Choose a System-</option>
+    <option value = "Playstation">Playstation</option>
+    <option value = "Xbox">Xbox</option>
+    <option value= "Nintendo">Nintendo</option>
+    <option value="PC">PC</option>
+    <option value = "Handheld">Handheld</option>
+    </select>
+    <button type = "submit">Submit</button>
+</form>
+<br>
+{{#games}}
+{{#user}}
+{{gamerTag}}({{name}}){{/user}} :  {{title}} on {{system}} <a href="/edit">Edit</a> <br>
+{{/games}}
+<br><br>
+<a href="/logout">Logout</a>
 </body>
 </html>

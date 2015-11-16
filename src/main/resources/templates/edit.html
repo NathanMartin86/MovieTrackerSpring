@@ -5,10 +5,10 @@
     <title>Edit</title>
 </head>
 <body>
-Feel Free to edit your game {{#user}} {{gamerTag}} {{/user}}
+{{#user}}Welcome {{name}}! You are now logged in as {{gamerTag}}{{/user}}
 <form action="editGame" method="post">
     <input type="hidden" name = "id" value="{{id}}"/>
-    <input type="test" placeholder="Enter your new game" name = text/>
+    <input type="text" placeholder="Enter your new game" name = "title"/>
     <button type="post">Submit</button>
 </form>
 </body>

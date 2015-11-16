@@ -23,11 +23,12 @@ public class GamesController {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("gamerTag");
 
+        model.addAttribute("games", games.findAll());
+
         if (username == null){
             return"login";
         }
         else {
-            model.addAttribute("games", games.findAll());
             model.addAttribute("user", users.findOneByGamerTag(username));
         }
         return "home";
@@ -69,10 +70,17 @@ public class GamesController {
         return "redirect:/";
     }
 
-    @RequestMapping("edit")
-    public String edit (){
-        return"redirect:edit";
+    @RequestMapping("/edit")
+    public String edit (Model model, int id, HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("gamerTag");
+        if (username == null) {
+            throw new Exception("Not Logged in");
+        }
+        model.addAttribute("id",id);
+        model.addAttribute("user", users.findOneByGamerTag(username));
+        return "edit";
     }
+
     @RequestMapping("editGame")
     public String editGame (int id, String title){
         Game game = games.findOne(id);
@@ -90,12 +98,8 @@ public class GamesController {
     }
 
     @RequestMapping ("deleteGame")
-    public String delete (Integer id){
+    public String delete (int id){
         games.delete(id);
         return "redirect:/";
     }
 }
-
-//play with HTML
-// how to link users <--> games
-// edit / delete functionality

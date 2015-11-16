@@ -22,14 +22,11 @@ public class Game {
   public Game(){
 
   }
-
-
-    public Game(Integer id, String system, String title) {
+    public Game (Integer id, String system, String title) {
         this.id = id;
         this.system = system;
         this.title = title;
     }
-
     @ManyToOne
     User user;
 }

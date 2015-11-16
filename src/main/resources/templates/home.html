@@ -22,7 +22,7 @@ Welcome {{#user}}{{name}}! You are now logged in as {{gamerTag}}{{/user}}
 <br>
 {{#games}}
 {{#user}}
-{{gamerTag}}({{name}}){{/user}} :  {{title}} on {{system}} <a href="/edit">Edit</a> <br>
+{{gamerTag}}({{name}}){{/user}} :  {{title}} on {{system}} <a href="/edit?id={{id}}">Edit</a> <a href="/deleteGame?id={{id}}">Delete</a><br>
 {{/games}}
 <br><br>
 <a href="/logout">Logout</a>

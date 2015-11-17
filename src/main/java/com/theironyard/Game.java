@@ -2,10 +2,7 @@ package com.theironyard;
 
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by macbookair on 11/12/15.
@@ -16,7 +13,10 @@ public class Game {
     @GeneratedValue
     Integer id;
 
+    @Column(nullable = false)
     String system;
+
+    @Column(nullable = false)
     String title;
 
   public Game(){

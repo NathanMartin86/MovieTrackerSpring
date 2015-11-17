@@ -13,8 +13,13 @@ public class User {
     @GeneratedValue
     Integer id;
 
+    @Column(nullable = false)
     String name;
+
+    @Column(nullable = false)
     String gamerTag;
+
+    @Column(nullable = false)
     String password;
 
     @OneToMany (mappedBy = "user")

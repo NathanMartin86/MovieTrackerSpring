@@ -1,8 +1,13 @@
 package com.theironyard;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,11 +24,13 @@ public class GamesController {
 
 
     @RequestMapping("/")
-    public String home(Model model, HttpServletRequest request) {
+    public String home(Model model, HttpServletRequest request, @RequestParam(defaultValue = "0") int page) {
         HttpSession session = request.getSession();
+        PageRequest pr = new PageRequest(page, 5);
+        Page p;
         String username = (String) session.getAttribute("gamerTag");
 
-        model.addAttribute("games", games.findAll());
+        p = games.findAll(pr);
 
         if (username == null){
             return"login";
@@ -31,6 +38,10 @@ public class GamesController {
         else {
             model.addAttribute("user", users.findOneByGamerTag(username));
         }
+        model.addAttribute("nextPage", page + 1);
+        model.addAttribute("games", p);
+        model.addAttribute("showNext", p.hasNext());
+
         return "home";
     }
 

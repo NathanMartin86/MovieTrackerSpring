@@ -26,5 +26,8 @@ Welcome {{#user}}{{name}}! You are now logged in as {{gamerTag}}{{/user}}
 {{/games}}
 <br><br>
 <a href="/logout">Logout</a>
+{{#showNext}}
+<a href= "/?page={{nextPage}}">Next</a>
+{{/showNext}}
 </body>
 </html>
